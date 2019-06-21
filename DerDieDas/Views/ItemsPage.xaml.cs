@@ -13,6 +13,7 @@ using DerDieDas.Views;
 using DerDieDas.ViewModels;
 using System.Threading;
 using Xamarin.Forms.Internals;
+using Xamarin.Essentials;
 
 namespace DerDieDas.Views
 {
@@ -21,7 +22,6 @@ namespace DerDieDas.Views
     [DesignTimeVisible(true)]
     public partial class ItemsPage : ContentPage
     {
-        List<string> Worten;
         String CurrentWort = string.Empty;
         String ButtonClicked = string.Empty;
         List<int> NumbersKnown = new List<int>();
@@ -33,18 +33,25 @@ namespace DerDieDas.Views
 
         protected void LoadWords()
         {
-            Worten = new List<string>();
-            string contents;
-            using (var wc = new System.Net.WebClient())
-            {
-                contents = wc.DownloadString("https://derdiedasbucket.s3-sa-east-1.amazonaws.com/worten.txt");
-                var worten = contents.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-                worten.ForEach(wort =>
+                var current = Connectivity.NetworkAccess;
+            if (current == NetworkAccess.Internet)
+                    {
+                Util.Worten = new List<string>();
+                string contents;
+                using (var wc = new System.Net.WebClient())
                 {
-                    if (wort != string.Empty)
-                        Worten.Add(wort);
-                });
+                    contents = wc.DownloadString("https://derdiedasbucket.s3-sa-east-1.amazonaws.com/worten.txt");
+                    var worten = contents.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                    worten.ForEach(wort =>
+                    {
+                        if (wort != string.Empty)
+                            Util.Worten.Add(wort);
+                    });
+                }
             }
+            else
+                DisplayAlert("Hallo", "Kein Internet.", "OK");
+
 
         }
 
@@ -56,17 +63,25 @@ namespace DerDieDas.Views
 
         protected string GetNextWord()
         {
-            if (NumbersKnown.Count == Worten.Count)
-                NumbersKnown = new List<int>();
-
-            var index = new Random().Next(0, Worten.Count);
-            while (NumbersKnown.Contains(index))
+            if (Util.Worten.Count == 0)
             {
-                index = new Random().Next(0, Worten.Count);
+                DisplayAlert("Hallo", "Deine Wörterbuch ist leer. Vielleicht dein Handy ist nicht verbindung.", "OK");
+                return string.Empty;
             }
-            NumbersKnown.Add(index);
-            CurrentWort = Worten[index];
-            return CurrentWort.Split(' ')[1];
+            else
+            {
+                if (NumbersKnown.Count == Util.Worten.Count)
+                    NumbersKnown = new List<int>();
+
+                var index = new Random().Next(0, Util.Worten.Count);
+                while (NumbersKnown.Contains(index))
+                {
+                    index = new Random().Next(0, Util.Worten.Count);
+                }
+                NumbersKnown.Add(index);
+                CurrentWort = Util.Worten[index];
+                return CurrentWort.Split(' ')[1];
+            }
         }
 
         protected override void OnAppearing()
