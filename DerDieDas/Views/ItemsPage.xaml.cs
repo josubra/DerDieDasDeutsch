@@ -14,6 +14,7 @@ using DerDieDas.ViewModels;
 using System.Threading;
 using Xamarin.Forms.Internals;
 using Xamarin.Essentials;
+using Newtonsoft.Json;
 
 namespace DerDieDas.Views
 {
@@ -22,7 +23,7 @@ namespace DerDieDas.Views
     [DesignTimeVisible(true)]
     public partial class ItemsPage : ContentPage
     {
-        String CurrentWort = string.Empty;
+        DeutschWort CurrentWort = new DeutschWort();
         String ButtonClicked = string.Empty;
         List<int> NumbersKnown = new List<int>();
 
@@ -33,19 +34,18 @@ namespace DerDieDas.Views
 
         protected void LoadWords()
         {
-                var current = Connectivity.NetworkAccess;
+            var current = Connectivity.NetworkAccess;
             if (current == NetworkAccess.Internet)
                     {
-                Util.Worten = new List<string>();
+                Util.Worten = new List<DeutschWort>();
                 string contents;
                 using (var wc = new System.Net.WebClient())
                 {
-                    contents = wc.DownloadString("https://derdiedasbucket.s3-sa-east-1.amazonaws.com/worten.txt");
-                    var worten = contents.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-                    worten.ForEach(wort =>
+                    contents = wc.DownloadString("https://derdiedasbucket.s3-sa-east-1.amazonaws.com/db_worten.txt");
+                    var deutschWorten = JsonConvert.DeserializeObject<List<DeutschWort>>(contents);
+                    deutschWorten.ForEach(deutschWort =>
                     {
-                        if (wort != string.Empty)
-                            Util.Worten.Add(wort);
+                        Util.Worten.Add(deutschWort);
                     });
                 }
             }
@@ -58,15 +58,14 @@ namespace DerDieDas.Views
         protected void Initialize()
         {
             LoadWords();
-            lblWort.Text = GetNextWord();
+            GetNextWord();
         }
 
-        protected string GetNextWord()
+        protected void GetNextWord()
         {
             if (Util.Worten.Count == 0)
             {
                 DisplayAlert("Hallo", "Deine Wörterbuch ist leer. Vielleicht dein Handy ist nicht verbindung.", "OK");
-                return string.Empty;
             }
             else
             {
@@ -80,7 +79,9 @@ namespace DerDieDas.Views
                 }
                 NumbersKnown.Add(index);
                 CurrentWort = Util.Worten[index];
-                return CurrentWort.Split(' ')[1];
+                lblWort.Text = CurrentWort.Wort;
+                lblPlural.Text = CurrentWort.Plural;
+                lblUbersetzung.Text = CurrentWort.Ubersetzung;
             }
         }
 
@@ -97,22 +98,30 @@ namespace DerDieDas.Views
             ButtonClicked = button.Text;
             btnDer.IsVisible =
                 btnDie.IsVisible = 
-                    btnDas.IsVisible = false;
+                    btnDas.IsVisible =
+                        lblFixedPlural.IsVisible =  
+                            lblPlural.IsVisible = 
+                                lblFixedUbersetzung.IsVisible = 
+                                    lblUbersetzung.IsVisible = false;
 
             frmAntwort.IsVisible = true;
-            var artikel = CurrentWort.Split(' ')[0];
+            var artikel = CurrentWort.Artikel;
             frmAntwort.BackgroundColor = artikel == ButtonClicked ? Color.Green : Color.Red;
-            lblAntwort.Text = CurrentWort.Split(' ')[0];
+            lblAntwort.Text = CurrentWort.Artikel;
 
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 ButtonClicked = string.Empty;
                 btnDer.IsVisible =
-                    btnDie.IsVisible =
-                        btnDas.IsVisible = true;
+               btnDie.IsVisible =
+                   btnDas.IsVisible =
+                       lblFixedPlural.IsVisible =
+                           lblPlural.IsVisible =
+                               lblFixedUbersetzung.IsVisible =
+                                   lblUbersetzung.IsVisible = true;
 
                 frmAntwort.IsVisible = false;
-                lblWort.Text = GetNextWord();
+                GetNextWord();
                 return false; 
             });
         }

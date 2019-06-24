@@ -6,6 +6,14 @@
         </Frame>
         <Label x:Name="lblWort" Text="Text" FontSize="55" HorizontalTextAlignment="Center" />
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <Label x:Name="lblFixedPlural" Text="Plural:" FontSize="15" HorizontalTextAlignment="Center" />
+            <Label x:Name="lblPlural" Text="dfasdfa" FontSize="15" HorizontalTextAlignment="Center" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0">
+            <Label x:Name="lblFixedUbersetzung" Text="Übersetzung:" FontSize="15" HorizontalTextAlignment="Center" />
+            <Label x:Name="lblUbersetzung" Text="11111111" FontSize="15" HorizontalTextAlignment="Center" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
             <Button x:Name="btnDer" BackgroundColor="Blue" TextColor="White" Text="Der" Clicked="DerDieDas_Clicked"></Button>    
             <Button x:Name="btnDie" BackgroundColor="Red" TextColor="White" Text="Die" Clicked="DerDieDas_Clicked"></Button>    
             <Button x:Name="btnDas" BackgroundColor="Green" TextColor="White" Text="Das" Clicked="DerDieDas_Clicked"></Button>    
