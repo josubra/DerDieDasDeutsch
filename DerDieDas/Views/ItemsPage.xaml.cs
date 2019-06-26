@@ -36,7 +36,7 @@ namespace DerDieDas.Views
         {
             var current = Connectivity.NetworkAccess;
             if (current == NetworkAccess.Internet)
-                    {
+            {
                 Util.Worten = new List<DeutschWort>();
                 string contents;
                 using (var wc = new System.Net.WebClient())
@@ -63,9 +63,13 @@ namespace DerDieDas.Views
 
         protected void GetNextWord()
         {
-            if (Util.Worten.Count == 0)
+            if (Util.Worten == null || Util.Worten.Count == 0)
             {
-                DisplayAlert("Hallo", "Deine Wörterbuch ist leer. Vielleicht dein Handy ist nicht verbindung.", "OK");
+                Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+                {
+                    DisplayAlert("Hallo", "Deine Wörterbuch ist leer. Vielleicht dein Handy ist nicht verbindung.", "OK");
+                    return false;
+                });
             }
             else
             {
