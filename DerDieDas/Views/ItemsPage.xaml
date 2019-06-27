@@ -18,5 +18,6 @@
             <Button x:Name="btnDie" BackgroundColor="Red" TextColor="White" Text="Die" Clicked="DerDieDas_Clicked"></Button>    
             <Button x:Name="btnDas" BackgroundColor="Green" TextColor="White" Text="Das" Clicked="DerDieDas_Clicked"></Button>    
         </StackLayout>
+        <ImageButton Source="speaker" BackgroundColor="White" Aspect="AspectFit" HorizontalOptions="Center" WidthRequest="80" HeightRequest="80" Clicked="Horen_Clicked"></ImageButton>
     </StackLayout>
 </ContentPage>

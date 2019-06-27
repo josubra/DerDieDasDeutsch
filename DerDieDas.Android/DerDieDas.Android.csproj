@@ -89,6 +89,10 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\speaker.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\speaker.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\speaker.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\speaker.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

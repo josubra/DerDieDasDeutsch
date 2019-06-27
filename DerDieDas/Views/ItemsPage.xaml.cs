@@ -15,6 +15,10 @@ using System.Threading;
 using Xamarin.Forms.Internals;
 using Xamarin.Essentials;
 using Newtonsoft.Json;
+using Amazon.Polly;
+using Amazon.Polly.Model;
+using System.IO;
+using Amazon.Runtime;
 
 namespace DerDieDas.Views
 {
@@ -34,8 +38,7 @@ namespace DerDieDas.Views
 
         protected void LoadWords()
         {
-            var current = Connectivity.NetworkAccess;
-            if (current == NetworkAccess.Internet)
+            if (Util.IsInternetAvailable())
             {
                 Util.Worten = new List<DeutschWort>();
                 string contents;
@@ -53,6 +56,21 @@ namespace DerDieDas.Views
                 DisplayAlert("Hallo", "Kein Internet.", "OK");
 
 
+        }
+
+        protected void ReadText(string text)
+        {
+            AmazonPollyClient pc = new AmazonPollyClient(new BasicAWSCredentials("", ""), Amazon.RegionEndpoint.EUWest1);
+
+            SynthesizeSpeechRequest sreq = new SynthesizeSpeechRequest();
+            sreq.Text = text;
+            sreq.OutputFormat = OutputFormat.Mp3;
+            sreq.VoiceId = VoiceId.Vicki;
+            sreq.LanguageCode = LanguageCode.DeDE;
+            
+            var sres = pc.SynthesizeSpeechAsync(sreq).Result;
+
+            Util.PlayAudio(sres.AudioStream);
         }
 
         protected void Initialize()
@@ -128,6 +146,14 @@ namespace DerDieDas.Views
                 GetNextWord();
                 return false; 
             });
+        }
+        void Horen_Clicked(object sender, System.EventArgs e)
+        {
+            if(Util.IsInternetAvailable())
+                ReadText(CurrentWort.Wort);
+            else
+                DisplayAlert("Hallo", "Kein Internet.", "OK");
+            
         }
     }
 }
