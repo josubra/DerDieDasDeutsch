@@ -14,9 +14,9 @@
             <Label x:Name="lblUbersetzung" Text="11111111" FontSize="15" HorizontalTextAlignment="Center" />
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <Button x:Name="btnDer" BackgroundColor="Blue" TextColor="White" Text="Der" Clicked="DerDieDas_Clicked"></Button>    
-            <Button x:Name="btnDie" BackgroundColor="Red" TextColor="White" Text="Die" Clicked="DerDieDas_Clicked"></Button>    
-            <Button x:Name="btnDas" BackgroundColor="Green" TextColor="White" Text="Das" Clicked="DerDieDas_Clicked"></Button>    
+            <Button x:Name="btnDer" WidthRequest="70" BackgroundColor="Blue" TextColor="White" Text="Der" Clicked="DerDieDas_Clicked"></Button>    
+            <Button x:Name="btnDie" WidthRequest="70" BackgroundColor="Red" TextColor="White" Text="Die" Clicked="DerDieDas_Clicked"></Button>    
+            <Button x:Name="btnDas" WidthRequest="70" BackgroundColor="Green" TextColor="White" Text="Das" Clicked="DerDieDas_Clicked"></Button>    
         </StackLayout>
         <ImageButton Source="speaker" BackgroundColor="White" Aspect="AspectFit" HorizontalOptions="Center" WidthRequest="80" HeightRequest="80" Clicked="Horen_Clicked"></ImageButton>
     </StackLayout>
