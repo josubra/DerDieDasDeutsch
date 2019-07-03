@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DerDieDas.Views.ItemsPage" Title="Der Die Das" x:Name="BrowseItemsPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DerDieDas.Views.WortenPage" Title="Der Die Das" x:Name="BrowseItemsPage">
     <StackLayout Spacing="20" Padding="15" VerticalOptions="CenterAndExpand">
         <Frame x:Name="frmAntwort" WidthRequest="100" HeightRequest="100" BackgroundColor="Red" HorizontalOptions="Center" CornerRadius="30" IsVisible="false"> 
             <Label x:Name="lblAntwort" Text="Das" FontSize="55" HorizontalTextAlignment="Center" TextColor="White" VerticalOptions="Center" />

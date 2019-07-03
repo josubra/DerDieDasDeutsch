@@ -6,8 +6,8 @@ namespace DerDieDas.Models
 {
     public enum MenuItemType
     {
-        Browse,
-        About
+        Worten,
+        Verben
     }
     public class HomeMenuItem
     {

@@ -1,37 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using DerDieDas.Models;
-using DerDieDas.Views;
-using DerDieDas.ViewModels;
-using System.Threading;
-using Xamarin.Forms.Internals;
-using Xamarin.Essentials;
-using Newtonsoft.Json;
 using Amazon.Polly;
 using Amazon.Polly.Model;
-using System.IO;
 using Amazon.Runtime;
+using DerDieDas.Models;
+using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace DerDieDas.Views
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(true)]
-    public partial class ItemsPage : ContentPage
+    public partial class WortenPage : ContentPage
     {
         DeutschWort CurrentWort = new DeutschWort();
         String ButtonClicked = string.Empty;
         List<int> NumbersKnown = new List<int>();
 
-        public ItemsPage()
+        public WortenPage()
         {
             InitializeComponent();
         }

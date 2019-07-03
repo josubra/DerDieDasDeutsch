@@ -20,7 +20,7 @@ namespace DerDieDas.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.Worten, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -29,11 +29,11 @@ namespace DerDieDas.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Browse:
-                        MenuPages.Add(id, new NavigationPage(new ItemsPage()));
+                    case (int)MenuItemType.Worten:
+                        MenuPages.Add(id, new NavigationPage(new WortenPage()));
                         break;
-                    case (int)MenuItemType.About:
-                        MenuPages.Add(id, new NavigationPage(new AboutPage()));
+                    case (int)MenuItemType.Verben:
+                        MenuPages.Add(id, new NavigationPage(new VerbenPage()));
                         break;
                 }
             }

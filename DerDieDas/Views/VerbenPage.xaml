@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DerDieDas.Views.VerbenPage" Title="Verben">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout VerticalOptions="Start">
+            <StackLayout Spacing="15" VerticalOptions="Center" Margin="30">
+                <Label x:Name="lblAntwort" Text="Genau =D" FontSize="25" HorizontalTextAlignment="Center" />
+                <Label x:Name="lblWort" Text="Text" FontSize="55" HorizontalTextAlignment="Center" />
+                <Button x:Name="btnOptionOne" BackgroundColor="Gray" TextColor="White" Text="Option one"></Button>    
+                <Button x:Name="btnOptionTwo" BackgroundColor="Gray" TextColor="White" Text="Option two"></Button>    
+                <Button x:Name="btnOptionThree" BackgroundColor="Gray" TextColor="White" Text="Option three"></Button>    
+                <Label x:Name="lblArt" Text="regelmäßige sein treenbar" FontSize="20" HorizontalTextAlignment="Center" />
+                <Label x:Name="lblPerfekt" Text="hat gewohnt" FontSize="20" HorizontalTextAlignment="Center" />
+            </StackLayout>
+            <Grid x:Name="grdKonjugation" Padding="10">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+                
+              <!--<Label Text="Indikativ Präsens" FontSize="18" 
+                     TextColor="Red" HorizontalTextAlignment="Start" 
+                     Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" />
+              <Label Text="Indikativ Präteritum" FontSize="18" 
+                     TextColor="Red" HorizontalTextAlignment="End" 
+                     Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" />    
+                
+              <Label Text="ich" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrasensIch" Text="wohne" FontSize="18" 
+                     HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="1" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+              <Label Text="ich" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="1" Grid.Column="5"  Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrateritumIch" Text="wohne" FontSize="18" 
+                     HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="6" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+                
+              <Label Text="du" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrasensDu" Text="wohnst" FontSize="18" 
+                     HorizontalTextAlignment="Start" Grid.Row="2" Grid.Column="1" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+              <Label Text="du" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrateritumDu" Text="wohntest" FontSize="18" 
+                     HorizontalTextAlignment="Start" Grid.Row="2" Grid.Column="6" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+                
+              <Label Text="er" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrasensEr" Text="wohnt" FontSize="18" 
+                     HorizontalTextAlignment="Start" Grid.Row="3" Grid.Column="1" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+              <Label Text="er" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrateritumEr" Text="wohnte" FontSize="18"
+                     HorizontalTextAlignment="Start" Grid.Row="3" Grid.Column="6" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+                
+              <Label Text="sie" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrasenssie" Text="wohnt" FontSize="18" 
+                     HorizontalTextAlignment="Start" Grid.Row="4" Grid.Column="1" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+              <Label Text="sie" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrateritumsie" Text="wohnte" FontSize="18"
+                     HorizontalTextAlignment="Start" Grid.Row="4" Grid.Column="6" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>  
+                
+              <Label Text="es" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrasensEs" Text="wohnt" FontSize="18" 
+                     HorizontalTextAlignment="Start" Grid.Row="5" Grid.Column="1" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>
+              <Label Text="es" FontSize="18" HorizontalTextAlignment="End" 
+                     Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="1" />
+              <Label x:Name="lblVerbPrateritumEs" Text="wohnte" FontSize="18"
+                     HorizontalTextAlignment="Start" Grid.Row="5" Grid.Column="6" 
+                     Grid.ColumnSpan="3" FontAttributes="Bold"/>  -->
+            </Grid>
+                </StackLayout>
+            </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

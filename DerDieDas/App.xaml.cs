@@ -1,8 +1,5 @@
-﻿using System;
+﻿using DerDieDas.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using DerDieDas.Services;
-using DerDieDas.Views;
 
 namespace DerDieDas
 {
@@ -12,8 +9,6 @@ namespace DerDieDas
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
         }
 
