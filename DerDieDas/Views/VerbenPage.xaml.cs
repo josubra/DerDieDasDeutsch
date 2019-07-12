@@ -159,6 +159,11 @@ namespace DerDieDas.Views
             }
         }
 
+        void Optionen_Clicked(object sender, System.EventArgs e)
+        {
+            GetNextVerb();
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
