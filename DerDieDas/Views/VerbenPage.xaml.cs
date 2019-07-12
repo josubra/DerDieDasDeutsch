@@ -113,7 +113,7 @@ namespace DerDieDas.Views
                 var indexs = new List<int>() { index, index2, index3 };
 
                 var indexOptionOne = new Random().Next(0, indexs.Count);
-                btnOptionOne.Text = Util.Verben[indexOptionOne].Ubersetzung;
+                btnOptionOne.Text = Util.Verben[indexs[indexOptionOne]].Ubersetzung;
 
                 var indexOptionTwo = new Random().Next(0, indexs.Count);
                 while (indexOptionTwo == indexOptionOne)
