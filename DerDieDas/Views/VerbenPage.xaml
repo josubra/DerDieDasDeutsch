@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DerDieDas.Views.VerbenPage" Title="Verben">
     <ContentPage.Content>
         <ScrollView>
@@ -6,9 +6,9 @@
             <StackLayout Spacing="15" VerticalOptions="Center" Margin="30">
                 <Label x:Name="lblAntwort" Text="Genau =D" FontSize="25" HorizontalTextAlignment="Center" />
                 <Label x:Name="lblWort" Text="Text" FontSize="55" HorizontalTextAlignment="Center" />
-                <Button x:Name="btnOptionOne" BackgroundColor="Gray" TextColor="White" Text="Option one" Clicked="Optionen_Clicked"></Button>    
-                <Button x:Name="btnOptionTwo" BackgroundColor="Gray" TextColor="White" Text="Option two" Clicked="Optionen_Clicked"></Button>    
-                <Button x:Name="btnOptionThree" BackgroundColor="Gray" TextColor="White" Text="Option three" Clicked="Optionen_Clicked"></Button>    
+                <Button x:Name="btnOptionOne" WidthRequest="350" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Text="Option one" Clicked="Optionen_Clicked"></Button>    
+                <Button x:Name="btnOptionTwo" WidthRequest="350" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Text="Option two" Clicked="Optionen_Clicked"></Button>    
+                <Button x:Name="btnOptionThree" WidthRequest="350" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Text="Option three" Clicked="Optionen_Clicked"></Button>    
                 <Label x:Name="lblArt" Text="regelmäßige sein treenbar" FontSize="20" HorizontalTextAlignment="Center" />
                 <Label x:Name="lblPerfekt" Text="hat gewohnt" FontSize="20" HorizontalTextAlignment="Center" />
             </StackLayout>
