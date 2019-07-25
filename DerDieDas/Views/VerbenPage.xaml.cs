@@ -163,6 +163,9 @@ namespace DerDieDas.Views
         void Optionen_Clicked(object sender, System.EventArgs e)
         {
             GetNextVerb();
+            cbOptionOne.IsChecked =
+                cbOptionTwo.IsChecked =
+                    cbOptionThree.IsChecked = false;
         }
 
         protected override void OnAppearing()
