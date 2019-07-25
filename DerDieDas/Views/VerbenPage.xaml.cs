@@ -82,20 +82,21 @@ namespace DerDieDas.Views
                 };
 
                 grdKonjugation.Children.Add(lblIndikativPrasens, 0, 0);
-                Grid.SetColumnSpan(lblIndikativPrasens, 5);
+                Grid.SetColumnSpan(lblIndikativPrasens, 4);
 
                 var lblIndikativPrateritum = new Label
                 {
                     Text = "Indikativ Präteritum",
                     FontSize = 18,
-                    HorizontalTextAlignment = TextAlignment.End,
+                    HorizontalTextAlignment = TextAlignment.Start,
                     TextColor = Color.Red
                 };
 
-                grdKonjugation.Children.Add(lblIndikativPrateritum, 4, 0);
-                Grid.SetColumnSpan(lblIndikativPrateritum, 4);
-
+                
                 OrganizierenKonjugation(CurrentVerb.Prasens, true);
+
+                grdKonjugation.Children.Add(lblIndikativPrateritum, 0, 7);
+                Grid.SetColumnSpan(lblIndikativPrateritum, 4);
 
                 OrganizierenKonjugation(CurrentVerb.Prateritum, false);
 
@@ -113,21 +114,21 @@ namespace DerDieDas.Views
                 var indexs = new List<int>() { index, index2, index3 };
 
                 var indexOptionOne = new Random().Next(0, indexs.Count);
-                btnOptionOne.Text = Util.Verben[indexs[indexOptionOne]].Ubersetzung;
+                lblOptionOne.Text = Util.Verben[indexs[indexOptionOne]].Ubersetzung;
 
                 var indexOptionTwo = new Random().Next(0, indexs.Count);
                 while (indexOptionTwo == indexOptionOne)
                 {
                     indexOptionTwo = new Random().Next(0, indexs.Count);
                 }
-                btnOptionTwo.Text = Util.Verben[indexs[indexOptionTwo]].Ubersetzung;
+                lblOptionTwo.Text = Util.Verben[indexs[indexOptionTwo]].Ubersetzung;
 
                 var indexOptionThree = new Random().Next(0, indexs.Count);
                 while (indexOptionThree == indexOptionOne || indexOptionThree == indexOptionTwo)
                 {
                     indexOptionThree = new Random().Next(0, indexs.Count);
                 }
-                btnOptionThree.Text = Util.Verben[indexs[indexOptionThree]].Ubersetzung;
+                lblOptionThree.Text = Util.Verben[indexs[indexOptionThree]].Ubersetzung;
             }
         }
 
@@ -151,10 +152,10 @@ namespace DerDieDas.Views
                     FontAttributes = FontAttributes.Bold
                 };
 
-                grdKonjugation.Children.Add(lblPronomen, istPrasens ? 0 : 5, i + 1);
+                grdKonjugation.Children.Add(lblPronomen, 0 , istPrasens ?  i + 1 : 7 + (i == 0 ? 1 : i + 1));
                 Grid.SetColumnSpan(lblPronomen, 1);
 
-                grdKonjugation.Children.Add(lblVerb, istPrasens ? 1 : 6, i + 1);
+                grdKonjugation.Children.Add(lblVerb, 1 , istPrasens ? i + 1 : 7 + (i == 0 ? 1 : i + 1));
                 Grid.SetColumnSpan(lblVerb, 3);
             }
         }

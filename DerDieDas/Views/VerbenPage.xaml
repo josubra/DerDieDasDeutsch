@@ -3,17 +3,32 @@
     <ContentPage.Content>
         <ScrollView>
         <StackLayout VerticalOptions="Start">
-            <StackLayout Spacing="15" VerticalOptions="Center" Margin="30">
-                <Label x:Name="lblAntwort" Text="Genau =D" FontSize="25" HorizontalTextAlignment="Center" />
+            <StackLayout Spacing="15" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Margin="30">
+                <!--<Label x:Name="lblAntwort" Text="Genau =D" FontSize="25" HorizontalTextAlignment="Center" />-->
                 <Label x:Name="lblWort" Text="Text" FontSize="55" HorizontalTextAlignment="Center" />
-                <Button x:Name="btnOptionOne" WidthRequest="350" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Text="Option one" Clicked="Optionen_Clicked"></Button>    
-                <Button x:Name="btnOptionTwo" WidthRequest="350" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Text="Option two" Clicked="Optionen_Clicked"></Button>    
-                <Button x:Name="btnOptionThree" WidthRequest="350" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Text="Option three" Clicked="Optionen_Clicked"></Button>    
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="cbOptionOne" Color="Green" CheckedChanged="Optionen_Clicked" />        
+                    <Label x:Name="lblOptionOne" Text="Text" FontSize="18" HorizontalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="cbOptionTwo" Color="Green" CheckedChanged="Optionen_Clicked" />        
+                    <Label x:Name="lblOptionTwo" Text="Text" FontSize="18" HorizontalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="cbOptionThree" Color="Green" CheckedChanged="Optionen_Clicked" />        
+                    <Label x:Name="lblOptionThree" Text="Text" FontSize="18" HorizontalTextAlignment="Center" />
+                </StackLayout>
                 <Label x:Name="lblArt" Text="regelmäßige sein treenbar" FontSize="20" HorizontalTextAlignment="Center" />
                 <Label x:Name="lblPerfekt" Text="hat gewohnt" FontSize="20" HorizontalTextAlignment="Center" />
             </StackLayout>
-            <Grid x:Name="grdKonjugation" Padding="10">
+            <Grid x:Name="grdKonjugation" HorizontalOptions="Center" Padding="10">
               <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -24,8 +39,6 @@
                 <RowDefinition Height="Auto" />
               </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
