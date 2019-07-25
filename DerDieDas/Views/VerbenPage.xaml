@@ -11,7 +11,7 @@
                     <Label x:Name="lblFalsch" Text="0" FontSize="14" TextColor="Red" />
                     <Label Text="|" FontSize="14" TextColor="Gray" />
                     <Label Text="Max Richtig" FontSize="14" TextColor="Green" />
-                    <Label x:Name="lblFalsch" Text="0" FontSize="14" TextColor="Green" />
+                    <Label x:Name="lblMaxRichtig" Text="0" FontSize="14" TextColor="Green" />
                 </StackLayout>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Margin="20,0">
                     <Label x:Name="lblWort" Text="Text" FontSize="40" HorizontalTextAlignment="Center" />

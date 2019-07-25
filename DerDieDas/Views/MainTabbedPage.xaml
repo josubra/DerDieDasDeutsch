@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BarBackgroundColor="#2196F3"
+            BarTextColor="White"
+            xmlns:views="clr-namespace:DerDieDas.Views"
+            android:TabbedPage.BarItemColor="#66FFFFFF"
+            android:TabbedPage.BarSelectedItemColor="White"
+            x:Class="DerDieDas.Views.MainTabbedPage">
+    <TabbedPage.Children>
+        <NavigationPage Title="Wörter" Icon="tab_about.png">
+            <x:Arguments>
+                <views:WortenPage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Verben" Icon="tab_about.png">
+            <x:Arguments>
+                <views:VerbenPage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Adjektive" Icon="tab_about.png">
+            <x:Arguments>
+                <views:VerbenPage />
+            </x:Arguments>
+        </NavigationPage>
+    </TabbedPage.Children>
+</TabbedPage>

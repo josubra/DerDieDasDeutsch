@@ -10,7 +10,7 @@
                 <Label x:Name="lblFalsch" Text="0" FontSize="14" TextColor="Red" />
                 <Label Text="|" FontSize="14" TextColor="Gray" />
                 <Label Text="Max Richtig" FontSize="14" TextColor="Green" />
-                <Label x:Name="lblFalsch" Text="0" FontSize="14" TextColor="Green" />
+                <Label x:Name="lblMaxRichtig" Text="0" FontSize="14" TextColor="Green" />
             </StackLayout>
             <StackLayout Spacing="10" Padding="15" VerticalOptions="CenterAndExpand">
                 <Frame x:Name="frmAntwort" WidthRequest="100" HeightRequest="100" BackgroundColor="Red" HorizontalOptions="Center" CornerRadius="30" IsVisible="false"> 
