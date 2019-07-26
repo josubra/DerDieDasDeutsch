@@ -14,6 +14,24 @@ namespace DerDieDas.Views
         public VerbenPage()
         {
             InitializeComponent();
+            lblOptionOne.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => CheckAndGo(cbOptionOne)),
+            });
+            lblOptionTwo.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => CheckAndGo(cbOptionTwo)),
+            });
+            lblOptionThree.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => CheckAndGo(cbOptionThree)),
+            });
+        }
+
+        protected void CheckAndGo(CheckBox check)
+        {
+            check.IsChecked = true;
+            Optionen_Clicked(check, new EventArgs());
         }
 
         public void Initialize()
