@@ -9,7 +9,6 @@ namespace DerDieDas.Views
     public partial class VerbenPage : ContentPage
     {
         Verb CurrentVerb = new Verb();
-        String ButtonClicked = string.Empty;
         List<int> NumbersKnown = new List<int>();
 
         public VerbenPage()
@@ -162,10 +161,41 @@ namespace DerDieDas.Views
 
         void Optionen_Clicked(object sender, System.EventArgs e)
         {
-            GetNextVerb();
-            cbOptionOne.IsChecked =
-                cbOptionTwo.IsChecked =
-                    cbOptionThree.IsChecked = false;
+            if (cbOptionOne.IsChecked || cbOptionTwo.IsChecked || cbOptionThree.IsChecked)
+            {
+                cbOptionOne.IsEnabled =
+                    cbOptionTwo.IsEnabled =
+                        cbOptionThree.IsEnabled = false;
+
+                lblOptionOne.TextColor = CurrentVerb.Ubersetzung == lblOptionOne.Text ? Color.Green : Color.Red;
+                lblOptionTwo.TextColor = CurrentVerb.Ubersetzung == lblOptionTwo.Text ? Color.Green : Color.Red;
+                lblOptionThree.TextColor = CurrentVerb.Ubersetzung == lblOptionThree.Text ? Color.Green : Color.Red;
+                var cbClicked = (CheckBox)sender;
+
+
+                if (this.FindByName<Label>(cbClicked.ClassId).Text == CurrentVerb.Ubersetzung)
+                {
+                    lblRichtig.Text = (Convert.ToInt32(lblRichtig.Text) + 1).ToString();
+                    lblMaxRichtig.Text = (Convert.ToInt32(lblMaxRichtig.Text) + 1).ToString();
+                }
+                else
+                    lblFalsch.Text = (Convert.ToInt32(lblFalsch.Text) + 1).ToString();
+
+                Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+                {
+                    GetNextVerb();
+                    cbOptionOne.IsChecked =
+                        cbOptionTwo.IsChecked =
+                            cbOptionThree.IsChecked = false;
+                    cbOptionOne.IsEnabled =
+                        cbOptionTwo.IsEnabled =
+                            cbOptionThree.IsEnabled = true;
+                    lblOptionOne.TextColor =
+                        lblOptionTwo.TextColor =
+                            lblOptionThree.TextColor = Color.Gray;
+                    return false;
+                });
+            }
         }
 
         protected override void OnAppearing()
@@ -173,6 +203,11 @@ namespace DerDieDas.Views
             base.OnAppearing();
 
             Initialize();
+        }
+
+        private void sbVerben_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
         }
     }
 }

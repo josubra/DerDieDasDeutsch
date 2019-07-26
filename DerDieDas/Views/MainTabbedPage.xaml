@@ -10,12 +10,12 @@
             android:TabbedPage.BarSelectedItemColor="White"
             x:Class="DerDieDas.Views.MainTabbedPage">
     <TabbedPage.Children>
-        <NavigationPage Title="Wörter" Icon="tab_about.png">
+        <NavigationPage Title="Wörter" Icon="documentsbutton.png">
             <x:Arguments>
                 <views:WortenPage />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Verben" Icon="tab_about.png">
+        <NavigationPage Title="Verben" Icon="book.png">
             <x:Arguments>
                 <views:VerbenPage />
             </x:Arguments>

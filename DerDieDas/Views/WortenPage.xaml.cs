@@ -5,6 +5,7 @@ using Amazon.Polly;
 using Amazon.Polly.Model;
 using Amazon.Runtime;
 using DerDieDas.Models;
+using MonkeyCache.FileStore;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -18,7 +19,7 @@ namespace DerDieDas.Views
         DeutschWort CurrentWort = new DeutschWort();
         String ButtonClicked = string.Empty;
         List<int> NumbersKnown = new List<int>();
-
+        const string _maxRichtigWorter = "maxRichtigWorter";
         public WortenPage()
         {
             InitializeComponent();
@@ -26,24 +27,69 @@ namespace DerDieDas.Views
 
         protected void LoadWords()
         {
-            if (Util.IsInternetAvailable())
+            var url = "https://derdiedasbucket.s3-sa-east-1.amazonaws.com/db_worten.txt";
+            try
             {
-                Util.Worten = new List<DeutschWort>();
-                string contents;
-                using (var wc = new System.Net.WebClient())
+                if (Util.IsInternetAvailable())
                 {
-                    contents = wc.DownloadString("https://derdiedasbucket.s3-sa-east-1.amazonaws.com/db_worten.txt");
-                    var deutschWorten = JsonConvert.DeserializeObject<List<DeutschWort>>(contents);
-                    deutschWorten.ForEach(deutschWort =>
+                    Util.Worten = new List<DeutschWort>();
+                    string contents;
+                    using (var wc = new WebClient())
                     {
-                        Util.Worten.Add(deutschWort);
-                    });
+                        wc.Timeout = 6000;
+                        contents = wc.DownloadString(url);
+                        var deutschWorten = JsonConvert.DeserializeObject<List<DeutschWort>>(contents);
+                        deutschWorten.ForEach(deutschWort =>
+                        {
+                            Util.Worten.Add(deutschWort);
+                        });
+                        ManageCache("save", url, contents, 7);
+                    }
+                }
+                else
+                {
+                    DisplayAlert("Hallo", "Kein Internet.", "OK");
+                    ReloadFromCache(url);
                 }
             }
-            else
-                DisplayAlert("Hallo", "Kein Internet.", "OK");
+            catch (Exception ex)
+            {
+                ReloadFromCache(url);
+            }
+        }
 
+        protected void ReloadFromCache(string url)
+        {
+            var json = ManageCache("get", url, null, 7);
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                var deutschWorten = JsonConvert.DeserializeObject<List<DeutschWort>>(json);
+                deutschWorten.ForEach(deutschWort =>
+                {
+                    Util.Worten.Add(deutschWort);
+                });
+            }
+        }
 
+        protected string ManageCache(string action, string id, string contents = null, int? days = null)
+        {
+            Barrel.ApplicationId = "DerDieDasDeutsch";
+            string retorno = string.Empty;
+            switch (action)
+            {
+                case "get":
+                    if (!Barrel.Current.IsExpired(id))
+                    {
+                        retorno = Barrel.Current.Get<string>(id);
+                    }
+                    break;
+                case "save":
+                    Barrel.Current.Add(id, contents, TimeSpan.FromDays(days ?? 7));
+                    break;
+                default:
+                    break;
+            }
+            return retorno;
         }
 
         protected void ReadText(string text)
@@ -64,6 +110,8 @@ namespace DerDieDas.Views
         protected void Initialize()
         {
             LoadWords();
+            var maxRichtig = ManageCache("get", _maxRichtigWorter);
+            lblMaxRichtig.Text = string.IsNullOrWhiteSpace(maxRichtig) ? "0" : maxRichtig;
             GetNextWord();
         }
 
@@ -117,19 +165,33 @@ namespace DerDieDas.Views
             frmAntwort.IsVisible = true;
             var artikel = CurrentWort.Artikel;
             frmAntwort.BackgroundColor = artikel == ButtonClicked ? Color.Green : Color.Red;
+
+            if(artikel == ButtonClicked)
+            {
+                lblRichtig.Text = (Convert.ToInt32(lblRichtig.Text) + 1).ToString();
+                var countRichtig = Convert.ToInt32(lblRichtig.Text);
+                var countMaxRichtig = Convert.ToInt32(lblMaxRichtig.Text);
+                if(countRichtig > countMaxRichtig)
+                {
+                    lblMaxRichtig.Text = (countMaxRichtig + 1).ToString();
+                    ManageCache("save", _maxRichtigWorter, lblMaxRichtig.Text);
+                }
+            }
+            else
+                lblFalsch.Text = (Convert.ToInt32(lblFalsch.Text) + 1).ToString();
+
             lblAntwort.Text = CurrentWort.Artikel;
 
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 ButtonClicked = string.Empty;
                 btnDer.IsVisible =
-               btnDie.IsVisible =
-                   btnDas.IsVisible =
-                       lblFixedPlural.IsVisible =
-                           lblPlural.IsVisible =
-                               lblFixedUbersetzung.IsVisible =
-                                   lblUbersetzung.IsVisible = true;
-
+                   btnDie.IsVisible =
+                       btnDas.IsVisible =
+                           lblFixedPlural.IsVisible =
+                               lblPlural.IsVisible =
+                                   lblFixedUbersetzung.IsVisible =
+                                       lblUbersetzung.IsVisible = true;
                 frmAntwort.IsVisible = false;
                 GetNextWord();
                 return false; 

@@ -128,6 +128,12 @@
     <BundleResource Include="Resources\speaker%403x.png" />
     <BundleResource Include="Resources\speaker%402x.png" />
     <BundleResource Include="Resources\speaker.png" />
+    <BundleResource Include="Resources\book%403x.png" />
+    <BundleResource Include="Resources\book%402x.png" />
+    <BundleResource Include="Resources\documentsbutton%403x.png" />
+    <BundleResource Include="Resources\documentsbutton%402x.png" />
+    <BundleResource Include="Resources\book.png" />
+    <BundleResource Include="Resources\documentsbutton.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
