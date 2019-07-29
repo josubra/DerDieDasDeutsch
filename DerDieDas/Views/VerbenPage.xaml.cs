@@ -156,7 +156,7 @@ namespace DerDieDas.Views
                 var verb = konjutaions[i];
                 var lblPronomen = new Label
                 {
-                    Text = verb.Pronomen == "er/sie/es" ? "e.s.e" : verb.Pronomen,
+                    Text = verb.Pronomen,
                     FontSize = 18,
                     HorizontalTextAlignment = TextAlignment.End,
                 };
