@@ -30,9 +30,9 @@ namespace DerDieDas.Views
             var url = "https://derdiedasbucket.s3-sa-east-1.amazonaws.com/db_worten.txt";
             try
             {
+                Util.Worten = new List<DeutschWort>();
                 if (Util.IsInternetAvailable())
                 {
-                    Util.Worten = new List<DeutschWort>();
                     string contents;
                     using (var wc = new WebClient())
                     {
@@ -43,12 +43,11 @@ namespace DerDieDas.Views
                         {
                             Util.Worten.Add(deutschWort);
                         });
-                        ManageCache("save", url, contents, 7);
+                        Util.ManageCache("save", url, contents, 7);
                     }
                 }
                 else
                 {
-                    DisplayAlert("Hallo", "Kein Internet.", "OK");
                     ReloadFromCache(url);
                 }
             }
@@ -60,7 +59,7 @@ namespace DerDieDas.Views
 
         protected void ReloadFromCache(string url)
         {
-            var json = ManageCache("get", url, null, 7);
+           var json = Util.ManageCache("get", url, null, 7);
             if (!string.IsNullOrWhiteSpace(json))
             {
                 var deutschWorten = JsonConvert.DeserializeObject<List<DeutschWort>>(json);
@@ -69,48 +68,12 @@ namespace DerDieDas.Views
                     Util.Worten.Add(deutschWort);
                 });
             }
-        }
-
-        protected string ManageCache(string action, string id, string contents = null, int? days = null)
-        {
-            Barrel.ApplicationId = "DerDieDasDeutsch";
-            string retorno = string.Empty;
-            switch (action)
-            {
-                case "get":
-                    if (!Barrel.Current.IsExpired(id))
-                    {
-                        retorno = Barrel.Current.Get<string>(id);
-                    }
-                    break;
-                case "save":
-                    Barrel.Current.Add(id, contents, TimeSpan.FromDays(days ?? 7));
-                    break;
-                default:
-                    break;
-            }
-            return retorno;
-        }
-
-        protected void ReadText(string text)
-        {
-            AmazonPollyClient pc = new AmazonPollyClient(new BasicAWSCredentials("", ""), Amazon.RegionEndpoint.EUWest1);
-
-            SynthesizeSpeechRequest sreq = new SynthesizeSpeechRequest();
-            sreq.Text = text;
-            sreq.OutputFormat = OutputFormat.Mp3;
-            sreq.VoiceId = VoiceId.Vicki;
-            sreq.LanguageCode = LanguageCode.DeDE;
-            
-            var sres = pc.SynthesizeSpeechAsync(sreq).Result;
-
-            Util.PlayAudio(sres.AudioStream);
-        }
+        }      
 
         protected void Initialize()
         {
             LoadWords();
-            var maxRichtig = ManageCache("get", _maxRichtigWorter);
+            var maxRichtig = Util.ManageCache("get", _maxRichtigWorter);
             lblMaxRichtig.Text = string.IsNullOrWhiteSpace(maxRichtig) ? "0" : maxRichtig;
             GetNextWord();
         }
@@ -174,7 +137,7 @@ namespace DerDieDas.Views
                 if(countRichtig > countMaxRichtig)
                 {
                     lblMaxRichtig.Text = (countMaxRichtig + 1).ToString();
-                    ManageCache("save", _maxRichtigWorter, lblMaxRichtig.Text);
+                    Util.ManageCache("save", _maxRichtigWorter, lblMaxRichtig.Text);
                 }
             }
             else
@@ -200,7 +163,7 @@ namespace DerDieDas.Views
         void Horen_Clicked(object sender, System.EventArgs e)
         {
             if(Util.IsInternetAvailable())
-                ReadText(CurrentWort.Wort);
+                Util.ReadText(CurrentWort.Wort);
             else
                 DisplayAlert("Hallo", "Kein Internet.", "OK");
             
