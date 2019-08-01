@@ -278,11 +278,11 @@ namespace DerDieDas.Views
         private void sbVerben_TextChanged(object sender, TextChangedEventArgs e)
         {
             var text = sbVerben.Text;
-            if (text.Length > 3)
+            if (text.Length >= 1)
             {
                 slVerben.IsVisible = true;
                 slQuizz.IsVisible = false;
-                lvVerben.ItemsSource = Util.Verben.Where(x => x.Name.ToLower().Contains(text.ToLower()));
+                lvVerben.ItemsSource = Util.Verben.Where(x => x.Name.ToLower().StartsWith(text.ToLower(), StringComparison.InvariantCulture));
             }
             else
             {
